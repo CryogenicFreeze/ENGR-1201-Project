@@ -79,17 +79,20 @@ void reroute()
 {
   turn_sensor(0);
   delay(600);
-  left_dist = get_distance();
+  left_dist = get_distance(); // turn sensor to the left and check the distance 
   delay(600);
   turn_sensor(1);
   delay(600);
-  right_dist = get_distance();
-  if (abs(left_dist - right_dist) < 5)
+  right_dist = get_distance(); // turn sensor to the right and check distance
+  if (abs(left_dist - right_dist) < 5 and (left_dist != 0) and (right_dist != 0)) // if the distances are close and not = 0 turn 180
   {
     //turn 180
-  } else
+  } else if (left_dist < right_dist) // if the distances are non similar and the left is closer turn right
   {
-    //turn
+    //turn right
+  } else 
+  {
+    //turn left
   }
 }
 
