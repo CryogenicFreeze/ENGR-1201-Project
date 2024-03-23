@@ -2,8 +2,11 @@
 #include <NewPing.h>
 #include <Servo.h>
 
+// ir sensor ======================================================
+const int irPin = 3; 
+
 // setup ultrasonic sensor ========================================
-const int trigPin = 9; // trigger pin set to 9
+const int trigPin = 11; // trigger pin set to 9
 const int echoPin = 10; // echo pin set to 10
 long duration;
 int distance;
@@ -12,7 +15,7 @@ float right_dist;
 NewPing sonar(trigPin, echoPin, 200); // initialize the sonar sensor and set max distance to 200cm
 
 //setup servo =====================================================
-const int servoPin = 11; // servo pwr set to pin 11
+const int servoPin = 9; // servo pwr set to pin 11
 Servo myservo;
 
 // Setup dc motors ================================================
