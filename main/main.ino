@@ -1,9 +1,12 @@
 #include <Adafruit_MotorShield.h>
 #include <NewPing.h>
 #include <Servo.h>
+#include <IRremote.h>
 
 // ir sensor ======================================================
-const int irPin = 3; 
+const int irPin = 7;
+IRrecv irrecv(irPin);
+decode_results results;
 
 // setup ultrasonic sensor ========================================
 const int trigPin = 11; // trigger pin set to 9
@@ -32,6 +35,7 @@ void setup()
   myMotorShield.begin(); //start the dc motor shield library
   myservo.attach(servoPin); //start servo connections at the assigned pin
   myservo.write(90); // set the servo to forward
+  irrecv.enableIRIn(); // start the ir reciever
 }
 
 // main loop ======================================================
@@ -39,6 +43,11 @@ void loop()
 {
   check_infront();
   Serial.println(get_distance());
+  if (irrecv.decode(&results)) {
+    stop(10000);
+		irrecv.resume(); // Receive the next value 
+	}
+	delay (100); // small delay to prevent reading errors
 }
 
 // turn servo left or right =======================================
@@ -64,7 +73,7 @@ void check_infront()
   } else
   {
     forward_backward(0);
-    set_speed(200);
+    set_speed(125);
     return;
   }
 }
@@ -117,7 +126,6 @@ void stop(float time)
   Back_Left->run(RELEASE);
   Front_Right->run(RELEASE);
   Back_Right->run(RELEASE);
-  Serial.println("Stopping");
   delay(time);
 }
 
