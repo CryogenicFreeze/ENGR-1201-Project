@@ -1,0 +1,3 @@
+Use CAD software to design a bracket to mount your ultrasonic sensor to your car's servo motor. You may use digital calipers to measure your team's ultrasonic sensor, and you may 'reverse-engineer' the bracket on Kumpati's car if it's helpful.
+Your design will be 3D-printed so your team can use the bracket to develop the first version of your object-avoiding car. The sooner your submit your design, the sooner it will be 3D-printed and returned to you.
+One person from your group should upload a .STL file and .3MF file. (As a reminder, the .STL file can be created in TinkerCAD; the .3MF file should be created in Cura.)
