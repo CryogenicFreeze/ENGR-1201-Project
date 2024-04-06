@@ -18,9 +18,9 @@ void setup()
 // main loop ======================================================
 void loop()
 {
-  one_meter(3000);
-  turn_left(850);
-  one_meter(3000);
+  one_meter(3175);
+  turn_left(535);
+  one_meter(3175);
   stop(5000);
 }
 
@@ -52,8 +52,8 @@ void stop(float time)
 // function to set car speed ====================================
 void set_speed(int speed) // max 255
 {
-  Front_Left->setSpeed(speed);
-  Back_Left->setSpeed(speed);
+  Front_Left->setSpeed(speed+8);
+  Back_Left->setSpeed(speed+8);
   Front_Right->setSpeed(speed);
   Back_Right->setSpeed(speed);
  }

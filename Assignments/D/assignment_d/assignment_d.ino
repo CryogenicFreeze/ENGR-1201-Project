@@ -70,18 +70,18 @@ void turn_right(float time)
 {
   left_right(0);
   set_speed(100);
-  delay(time)
+  delay(time);
 }
 
 // check for obstacles ============================================
 void check_infront()
 {
   get_distance();
-  if ((distance < 30) and (distance != 0))
+  if ((distance < 35) and (distance != 0))
   {
     stop(1000);
-    turn_right(850)
-    one_meter(3000)
+    turn_right(535);
+    one_meter(3175);
     stop(5000);
   } else
   {
@@ -112,8 +112,8 @@ void stop(float time)
 // function to set car speed ====================================
 void set_speed(int speed) // max 255
 {
-  Front_Left->setSpeed(speed);
-  Back_Left->setSpeed(speed);
+  Front_Left->setSpeed(speed+8);
+  Back_Left->setSpeed(speed+8);
   Front_Right->setSpeed(speed);
   Back_Right->setSpeed(speed);
  }
