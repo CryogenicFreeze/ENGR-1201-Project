@@ -1,12 +1,6 @@
 #include <Adafruit_MotorShield.h>
 #include <NewPing.h>
 #include <Servo.h>
-#include <IRremote.h>
-
-// ir sensor ======================================================
-const int irPin = 7;
-IRrecv irrecv(irPin);
-decode_results results;
 
 // setup ultrasonic sensor ========================================
 const int trigPin = 11; // trigger pin set to 9
@@ -35,7 +29,6 @@ void setup()
   myMotorShield.begin(); //start the dc motor shield library
   myservo.attach(servoPin); //start servo connections at the assigned pin
   myservo.write(90); // set the servo to forward
-  irrecv.enableIRIn(); // start the ir reciever
 }
 
 // main loop ======================================================
@@ -97,6 +90,7 @@ void reroute()
   turn_sensor(1);
   delay(600);
   right_dist = get_distance(); // turn sensor to the right and check distance
+  myservo.write(90);
   if (abs(left_dist - right_dist) < 5 and (left_dist != 0) and (right_dist != 0)) // if the distances are close and not = 0 turn 180
   {
     turn(0, 1070); // turn 180
@@ -105,18 +99,7 @@ void reroute()
     turn(0, 535); // turn right
   } else 
   {
-    turn(1, 535) //turn left
-  }
-}
-
-// easing function ================================================
-int accel_ease(float dx, int wait_time, int max_speed) //declare dx step value and time between loops in ns, and max motor speed(less than 255)
-{
-  float y;
-  for (float x = 0; x <= 1.5; x += dx) 
-  {
-    y = max_speed*(pow(x, 2) - (pow(x, 4)/3) + ((2*pow(x, 6))/45) - (pow(x, 8)/315)); //easing function
-    delay(wait_time);
+    turn(1, 535); //turn left
   }
 }
 
