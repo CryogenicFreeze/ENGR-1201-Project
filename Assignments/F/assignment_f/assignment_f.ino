@@ -67,7 +67,7 @@ void check_infront()
   } else
   {
     forward_backward(0);
-    set_speed(100);
+    set_speed(255);
     return;
   }
 }
@@ -116,8 +116,8 @@ void stop(float time)
 // function to set car speed ====================================
 void set_speed(int speed) // max 255
 {
-  Front_Left->setSpeed(speed+8);
-  Back_Left->setSpeed(speed+8);
+  Front_Left->setSpeed(speed);
+  Back_Left->setSpeed(speed);
   Front_Right->setSpeed(speed);
   Back_Right->setSpeed(speed);
  }

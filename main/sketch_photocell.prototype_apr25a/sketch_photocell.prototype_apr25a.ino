@@ -17,9 +17,9 @@ void loop()
  
   Serial.print("Analog reading = ");
   Serial.println(photocellReading);     // the raw analog reading
-    if (photocellReading < 300) {
+    if (photocellReading < 500) {
     Serial.println(" - Dark");
-  } else if (photocellReading > 300) {
+  } else if (photocellReading > 500) {
     Serial.println(" - Light");
   }
   
