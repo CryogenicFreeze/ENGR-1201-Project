@@ -111,25 +111,25 @@ void check_for_obstacles() {
   delay(100);
   l_wall_dist = get_distance();
   check_if_close(l_wall_dist);
-  delay(100);
+  //delay(100);
 
   myservo.write(90);
   delay(100);
   f_dist = get_distance();
   check_if_close(f_dist);
-  delay(100);
+  //delay(100);
 
   myservo.write(30);
   delay(100);
   r_wall_dist = get_distance();
   check_if_close(r_wall_dist);
-  delay(100);
+  //delay(100);
 
   myservo.write(90);
   delay(100);
   f_dist = get_distance();
   check_if_close(f_dist);
-  delay(100);
+  //delay(100);
 
 }
 
