@@ -4,11 +4,9 @@
 #include <IRremote.h>
 
 // leds ======================================================
-const int photocellPin = 0;
-const int led_pin_R = 6;
-const int led_pin_G = 5;
-const int led_pin_B = 3;
-int led_brightness;
+const int led_pin_R = 5;
+const int led_pin_Y = 4;
+const int led_pin_G = 3;
 
 // ir sensor ======================================================
 const int irPin = 7;
@@ -48,15 +46,14 @@ void setup() {
   irrecv.enableIRIn(); //setup the ir reciever
 
   pinMode(led_pin_R, OUTPUT);
+  pinMode(led_pin_Y, OUTPUT);
   pinMode(led_pin_G, OUTPUT);
-  pinMode(led_pin_B, OUTPUT);
 }
 
 // main loop ======================================================
 void loop() {
   if (is_running == 1){
     check_for_obstacles();
-    //led_color(0,255,0);
   } else {
     halt();
   }
@@ -68,20 +65,6 @@ void turn(int v, float time) {
   left_right(v);
   set_speed(100);
   delay(time);
-}
-
-// led function =============================================
-void led_color(int red, int green, int blue) {
-  int photocellReading = 1023 - analogRead(photocellPin);
-  led_brightness = map(photocellReading, 0, 1023, 0, 255);
-  analogWrite(led_pin_R, red);
-  analogWrite(led_pin_G, green); // 0 < val < 255
-  analogWrite(led_pin_B, blue);
-   if (photocellReading < 300){
-    led_brightness = 255;
-  } else if (photocellReading > 300){
-    led_brightness = 0;
-  }
 }
 
 // check for ir remote signal =====================================
@@ -98,9 +81,15 @@ void signal_check() {
 void check_if_close(float dist) {
   if (dist < 40 and dist != 0) {
     stop(100);
+    digitalWrite(led_pin_R, HIGH);
+    digitalWrite(led_pin_G, LOW);
+    digitalWrite(led_pin_Y, LOW);
     reroute();
   } else {
     forward_backward(0);
+    digitalWrite(led_pin_G, HIGH);
+    digitalWrite(led_pin_R, LOW);
+    digitalWrite(led_pin_Y, LOW);
     set_speed(100);
   }
 }
@@ -152,7 +141,9 @@ void reroute() {
   right_dist = get_distance(); // turn sensor to the right and check distance
   delay(250);
   myservo.write(90);
-  led_color(255,255,0);
+  digitalWrite(led_pin_Y, HIGH);
+  digitalWrite(led_pin_G, LOW);
+  digitalWrite(led_pin_R, LOW);
   if (abs(left_dist - right_dist) < 5 and (left_dist != 0) and (right_dist != 0)) { // if the distances are close and not = 0 turn 180
     turn(0, 1070); // turn 180
   } else if (left_dist < right_dist) { // if the distances are non similar and the left is closer turn right
